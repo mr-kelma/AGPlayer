@@ -1,6 +1,6 @@
 import UIKit
 
-final class StartModuleBuilder {
+enum StartModuleBuilder {
     static func build() -> UIViewController {
         let viewController = StartViewController()
         let presenter = StartPresenter()
