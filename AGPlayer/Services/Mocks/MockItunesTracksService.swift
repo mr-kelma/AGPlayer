@@ -7,14 +7,14 @@ final class MockItunesTracksService: ItunesTracksServiceProtocol {
             artistName: "Daft Punk",
             collectionName: "Discovery",
             trackName: "Harder, Better, Faster, Stronger",
-            trackViewUrl: "https://i1.sndcdn.com/artworks-000245246654-26x90g-t500x500.jpg",
+            artworkUrl100: "https://i1.sndcdn.com/artworks-000245246654-26x90g-t500x500.jpg",
             previewUrl: "https://media.pitchfork.com/photos/63f641d801dbe796fab80055/1:1/w_320,c_limit/Daft-Punk-Random-Access-Memories.jpg"
         ),
         Track(
             artistName: "Radiohead",
             collectionName: "In Rainbows",
             trackName: "Nude",
-            trackViewUrl: "https://i1.sndcdn.com/artworks-uMuepaG1pEYh-0-t500x500.png",
+            artworkUrl100: "https://i1.sndcdn.com/artworks-uMuepaG1pEYh-0-t500x500.png",
             previewUrl: "https://upload.wikimedia.org/wikipedia/en/d/d2/Hbfs_single.jpg"
         )
     ]

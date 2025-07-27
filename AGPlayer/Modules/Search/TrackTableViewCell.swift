@@ -11,25 +11,25 @@ final class TrackTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 6
+        imageView.layer.cornerRadius = 8
         imageView.backgroundColor = .secondarySystemBackground
         return imageView
     }()
     
     private let trackNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: 14)
         label.textColor = .label
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let artistNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 12)
         label.textColor = .secondaryLabel
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -55,36 +55,37 @@ final class TrackTableViewCell: UITableViewCell {
     // MARK: - Public methods
     
     func configure(with track: Track) {
-        trackNameLabel.text = track.trackName
-        artistNameLabel.text = track.artistName
-
-        if let urlString = track.trackViewUrl,
+        trackNameLabel.text = track.trackName?.isEmpty == false ? track.trackName : "Untitled"
+        artistNameLabel.text = track.artistName?.isEmpty == false ? track.artistName : "Untitled"
+        
+        // To cache pictures can use, for example, Kingfisher
+        if let urlString = track.artworkUrl100,
            let url = URL(string: urlString) {
-            coverImageView.loadImage(from: url, placeholder: UIImage(systemName: "music.note"))
+            coverImageView.loadImage(from: url, placeholder: UIImage(systemName: "placeholder"))
         }
     }
+
     
     // MARK: - Private methods
     
     private func setupLayout() {
-        contentView.addSubview(coverImageView)
-        contentView.addSubview(trackNameLabel)
-        contentView.addSubview(artistNameLabel)
+        let labelsStackView = UIStackView(arrangedSubviews: [trackNameLabel, artistNameLabel])
+        labelsStackView.axis = .vertical
+        labelsStackView.spacing = 2
+        labelsStackView.translatesAutoresizingMaskIntoConstraints = false
+
+        [coverImageView, labelsStackView].forEach { contentView.addSubview($0) }
 
         NSLayoutConstraint.activate([
             coverImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            coverImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            coverImageView.widthAnchor.constraint(equalToConstant: 60),
-            coverImageView.heightAnchor.constraint(equalToConstant: 60),
-
-            trackNameLabel.topAnchor.constraint(equalTo: coverImageView.topAnchor),
-            trackNameLabel.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 12),
-            trackNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
-            artistNameLabel.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 4),
-            artistNameLabel.leadingAnchor.constraint(equalTo: trackNameLabel.leadingAnchor),
-            artistNameLabel.trailingAnchor.constraint(equalTo: trackNameLabel.trailingAnchor),
-            artistNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
+            coverImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            coverImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            coverImageView.heightAnchor.constraint(equalToConstant: 50),
+            coverImageView.widthAnchor.constraint(equalTo: coverImageView.heightAnchor),
+            
+            labelsStackView.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 8),
+            labelsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            labelsStackView.centerYAnchor.constraint(equalTo: coverImageView.centerYAnchor)
         ])
     }
 }

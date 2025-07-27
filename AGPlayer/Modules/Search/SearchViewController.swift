@@ -5,12 +5,20 @@ final class SearchViewController: UIViewController {
     
     // MARK: - Properties
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    private let searchTextPublisher = PassthroughSubject<String, Never>()
+    
     var presenter: SearchPresenterProtocol!
     
     private var searchView: SearchView {
         view as! SearchView
     }
 
+    private var textPublisher: AnyPublisher<String, Never> {
+        searchTextPublisher.eraseToAnyPublisher()
+    }
+    
     private var debounceCancellable: AnyCancellable?
     private var currentResults: [Track] = []
     
@@ -24,6 +32,7 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
         configureAppearance()
         setupBindings()
+        setupSearchController()
         setupTableView()
     }
 
@@ -32,12 +41,11 @@ final class SearchViewController: UIViewController {
     private func configureAppearance() {
         title = "Search"
         view.backgroundColor = .systemBackground
-        navigationItem.searchController = searchView.searchController
-        definesPresentationContext = true
+        navigationItem.searchController = searchController
     }
     
     private func setupBindings() {
-        debounceCancellable = searchView.textPublisher
+        debounceCancellable = textPublisher
             .handleEvents(receiveOutput: { [weak self] text in
                 guard text.count >= 3 else { return }
                 self?.searchView.showLoading()
@@ -54,14 +62,22 @@ final class SearchViewController: UIViewController {
             }
     }
 
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Artists, Songs, Lyrics and More"
+        searchController.searchBar.autocapitalizationType = .none
+    }
+    
     private func setupTableView() {
         searchView.tableView.rowHeight = UITableView.automaticDimension
         searchView.tableView.estimatedRowHeight = 80
 
         searchView.tableView.dataSource = self
+        searchView.tableView.delegate = self
         searchView.tableView.register(TrackTableViewCell.self, forCellReuseIdentifier: TrackTableViewCell.reuseIdentifier)
     }
-
 }
 
 // MARK: - SearchViewInput
@@ -95,5 +111,34 @@ extension SearchViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: TrackTableViewCell.reuseIdentifier, for: indexPath) as! TrackTableViewCell
         cell.configure(with: track)
         return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension SearchViewController: UITableViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchController.searchBar.resignFirstResponder()
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchTextPublisher.send("")
+        currentResults = []
+        searchView.showEmptyState()
+        searchView.tableView.reloadData()
+        searchController.isActive = false
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let keyword = searchController.searchBar.text ?? ""
+        searchTextPublisher.send(keyword)
     }
 }

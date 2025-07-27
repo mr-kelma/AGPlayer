@@ -1,11 +1,9 @@
 import UIKit
-import Combine
 
 final class SearchView: UIView {
     
     // MARK: - Properties
     
-    let searchController = UISearchController(searchResultsController: nil)
     let tableView = UITableView()
     
     private let activityIndicator = UIActivityIndicatorView(style: .large)
@@ -17,11 +15,6 @@ final class SearchView: UIView {
         label.isHidden = true
         return label
     }()
-    
-    private let searchTextPublisher = PassthroughSubject<String, Never>()
-    var textPublisher: AnyPublisher<String, Never> {
-        searchTextPublisher.eraseToAnyPublisher()
-    }
 
     // MARK: - Init
     
@@ -29,7 +22,6 @@ final class SearchView: UIView {
         super.init(frame: frame)
         configureAppearance()
         setupLayout()
-        setupSearchController()
     }
 
     required init?(coder: NSCoder) {
@@ -81,21 +73,5 @@ final class SearchView: UIView {
             emptyStateLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             emptyStateLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
-    }
-
-    private func setupSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Artists, Songs, Lyrics and More"
-        searchController.searchBar.autocapitalizationType = .none
-    }
-}
-
-// MARK: - UISearchResultsUpdating
-
-extension SearchView: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        let keyword = searchController.searchBar.text ?? ""
-        searchTextPublisher.send(keyword)
     }
 }
