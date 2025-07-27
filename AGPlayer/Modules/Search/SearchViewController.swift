@@ -40,7 +40,6 @@ final class SearchViewController: UIViewController {
     
     private func configureAppearance() {
         title = "Search"
-        view.backgroundColor = .systemBackground
         navigationItem.searchController = searchController
     }
     
@@ -119,6 +118,13 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UITableViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchController.searchBar.resignFirstResponder()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedTrack = currentResults[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
+        searchController.searchBar.resignFirstResponder()
+        presenter.router?.goToPlayer(with: selectedTrack)
     }
 }
 

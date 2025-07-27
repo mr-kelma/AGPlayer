@@ -8,7 +8,6 @@ final class TrackTableViewCell: UITableViewCell {
     
     private let coverImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
@@ -21,7 +20,6 @@ final class TrackTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 14)
         label.textColor = .label
         label.numberOfLines = 1
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -55,8 +53,8 @@ final class TrackTableViewCell: UITableViewCell {
     // MARK: - Public methods
     
     func configure(with track: Track) {
-        trackNameLabel.text = track.trackName?.isEmpty == false ? track.trackName : "Untitled"
-        artistNameLabel.text = track.artistName?.isEmpty == false ? track.artistName : "Untitled"
+        trackNameLabel.text = track.trackName?.isEmpty == false ? track.trackName : "Unknown song"
+        artistNameLabel.text = track.artistName?.isEmpty == false ? track.artistName : "Unknown artist"
         
         // To cache pictures can use, for example, Kingfisher
         if let urlString = track.artworkUrl100,
@@ -72,9 +70,11 @@ final class TrackTableViewCell: UITableViewCell {
         let labelsStackView = UIStackView(arrangedSubviews: [trackNameLabel, artistNameLabel])
         labelsStackView.axis = .vertical
         labelsStackView.spacing = 2
-        labelsStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        [coverImageView, labelsStackView].forEach { contentView.addSubview($0) }
+        [coverImageView, labelsStackView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
+        }
 
         NSLayoutConstraint.activate([
             coverImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),

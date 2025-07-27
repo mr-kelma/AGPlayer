@@ -56,10 +56,10 @@ final class SearchView: UIView {
     }
     
     private func setupLayout() {
-        [tableView, activityIndicator, emptyStateLabel].forEach { addSubview($0) }
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        emptyStateLabel.translatesAutoresizingMaskIntoConstraints = false
+        [tableView, activityIndicator, emptyStateLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            addSubview($0)
+        }
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),

@@ -17,7 +17,7 @@ protocol SearchPresenterProtocol: AnyObject {
 }
 
 protocol SearchRouterProtocol: AnyObject {
-    func goToPlayer()
+    func goToPlayer(with track: Track)
 }
 
 protocol SearchViewInput: AnyObject {
