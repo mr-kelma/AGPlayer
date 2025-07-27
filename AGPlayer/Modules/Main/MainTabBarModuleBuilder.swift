@@ -18,8 +18,7 @@ enum MainTabBarModuleBuilder {
     }
 
     private static func makeSearchTab(tag: Int) -> UIViewController {
-        let searchVC = ViewController()
-        searchVC.view.backgroundColor = .systemBackground
+        let searchVC = SearchModuleBuilder.build()
         searchVC.tabBarItem = UITabBarItem(
             title: "Search",
             image: UIImage(systemName: "magnifyingglass"),

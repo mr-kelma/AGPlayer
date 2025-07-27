@@ -15,7 +15,7 @@ final class StartView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        configureAppearance()
         setupLayout()
     }
 
@@ -24,6 +24,10 @@ final class StartView: UIView {
     }
     
     // MARK: - Private methods
+    
+    private func configureAppearance() {
+        backgroundColor = .white
+    }
     
     private func setupLayout() {
         addSubview(logoImageView)
