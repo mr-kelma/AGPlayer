@@ -7,14 +7,14 @@ enum SearchModuleBuilder {
         let itunesTracksService = ItunesTracksService.shared
         let interactor = SearchInteractor(itunesTracksService: itunesTracksService)
         let router = SearchRouter()
-
+        
         viewController.presenter = presenter
         presenter.view = viewController
         presenter.interactor = interactor
         presenter.router = router
         interactor.output = presenter
         router.viewController = viewController
-
+        
         return viewController
     }
 }

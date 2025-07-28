@@ -9,17 +9,19 @@ final class SearchPresenter: SearchPresenterProtocol {
     var router: SearchRouterProtocol?
     
     // MARK: - Public methods
-
+    
     func didSearch(for keyword: String) {
         interactor?.searchTracks(with: keyword)
     }
 }
 
+// MARK: - SearchInteractorOutput
+
 extension SearchPresenter: SearchInteractorOutput {
     func didReceive(results: [Track]) {
         view?.displayResults(results)
     }
-
+    
     func didFail(with error: Error) {
         view?.displayError(error)
     }

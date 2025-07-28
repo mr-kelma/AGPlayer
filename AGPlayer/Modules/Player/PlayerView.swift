@@ -75,17 +75,17 @@ final class PlayerView: UIView {
     private let gradientLayer = CAGradientLayer()
     
     // MARK: - Init
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureAppearance()
         setupLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Layout
     
     override func layoutSubviews() {
@@ -98,7 +98,7 @@ final class PlayerView: UIView {
     func updateCurrentTime(_ seconds: Double) {
         currentTimeLabel.text = formatTime(seconds)
     }
-
+    
     func updateDuration(_ seconds: Double) {
         durationLabel.text = formatTime(seconds)
     }
@@ -111,15 +111,15 @@ final class PlayerView: UIView {
     }
     
     // MARK: - Private methods
-
+    
     private func configureAppearance() {
         self.backgroundColor = .lightGray
         layer.insertSublayer(gradientLayer, at: 0)
     }
-
+    
     private func formatTime(_ seconds: Double) -> String {
         guard seconds.isFinite else { return "0:00" }
-
+        
         let intSec = Int(seconds)
         return String(format: "%d:%02d", intSec / 60, intSec % 60)
     }
@@ -137,21 +137,21 @@ final class PlayerView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             addSubview($0)
         }
-
+        
         NSLayoutConstraint.activate([
             coverImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 48),
             coverImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             coverImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             coverImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             coverImageView.heightAnchor.constraint(equalTo: coverImageView.widthAnchor),
-
+            
             dismissButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12),
             dismissButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-
+            
             labelsStackView.topAnchor.constraint(equalTo: coverImageView.bottomAnchor, constant: 24),
             labelsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             labelsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
-
+            
             playPauseButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             playPauseButton.topAnchor.constraint(equalTo: labelsStackView.bottomAnchor, constant: 24),
             playPauseButton.heightAnchor.constraint(equalToConstant: 48),
@@ -166,11 +166,11 @@ final class PlayerView: UIView {
         guard let image = image else { return }
         
         let downscaled = image.scaled(to: CGSize(width: 50, height: 50))
-
+        
         DispatchQueue.global(qos: .userInteractive).async {
             let dominantColors = downscaled.extractDominantColors(maxCount: 2)
             guard dominantColors.count >= 2 else { return }
-
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
                 guard let self = self else { return }
                 
@@ -178,11 +178,11 @@ final class PlayerView: UIView {
                 animation.type = .fade
                 animation.duration = 0.25
                 self.gradientLayer.add(animation, forKey: "fadeTransition")
-
+                
                 self.gradientLayer.colors = dominantColors.map { $0.cgColor }
                 self.gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
                 self.gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-
+                
                 self.playPauseButton.tintColor = dominantColors.last?.lighter(by: 20)
             }
         }

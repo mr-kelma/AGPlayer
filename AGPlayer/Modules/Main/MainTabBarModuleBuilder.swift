@@ -16,7 +16,7 @@ enum MainTabBarModuleBuilder {
         vc.tabBarItem = UITabBarItem(title: title, image: UIImage(systemName: icon), tag: tag)
         return vc
     }
-
+    
     private static func makeSearchTab(tag: Int) -> UIViewController {
         let searchVC = SearchModuleBuilder.build()
         searchVC.tabBarItem = UITabBarItem(

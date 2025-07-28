@@ -12,7 +12,7 @@ final class PlayerInteractor: PlayerInteractorProtocol {
     private var previewURL: URL?
     private var statusObserver: NSKeyValueObservation?
     private var timeObserverToken: Any?
-
+    
     // MARK: - Init
     
     deinit {
@@ -21,20 +21,20 @@ final class PlayerInteractor: PlayerInteractorProtocol {
         }
         statusObserver = nil
     }
-
+    
     // MARK: - Public methods
     
     func setPreviewURL(_ url: URL?) {
         previewURL = url
     }
-
+    
     func prepareToPlay() {
         guard let url = previewURL else { return }
-
+        
         let item = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: item)
-        observePlayerTime() // ✅ <— добавлено сюда
-
+        observePlayerTime()
+        
         statusObserver = item.observe(\.status, options: [.new, .initial]) { [weak self] item, _ in
             guard let self = self else { return }
             if item.status == .readyToPlay {
@@ -45,7 +45,7 @@ final class PlayerInteractor: PlayerInteractorProtocol {
             }
         }
     }
-
+    
     func togglePlayback() {
         if isPlaying {
             player?.pause()
@@ -54,12 +54,12 @@ final class PlayerInteractor: PlayerInteractorProtocol {
         }
         isPlaying.toggle()
     }
-
+    
     // MARK: - Private methods
     
     private func observePlayerTime() {
         guard let player = player else { return }
-
+        
         let interval = CMTime(seconds: 0.5, preferredTimescale: 600)
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
             guard let self = self else { return }
@@ -68,7 +68,7 @@ final class PlayerInteractor: PlayerInteractorProtocol {
             if current.isFinite && duration.isFinite {
                 self.output?.didUpdatePlayback(currentTime: current, duration: duration)
             }
-
+            
             if current >= duration, duration > 0 {
                 self.player?.seek(to: .zero)
                 self.player?.pause()

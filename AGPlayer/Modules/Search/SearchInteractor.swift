@@ -4,11 +4,11 @@ final class SearchInteractor: SearchInteractorProtocol {
     
     private let itunesTracksService: ItunesTracksServiceProtocol
     weak var output: SearchInteractorOutput?
-
+    
     init(itunesTracksService: ItunesTracksServiceProtocol) {
         self.itunesTracksService = itunesTracksService
     }
-
+    
     func searchTracks(with keyword: String) {
         itunesTracksService.searchTracks(keyword: keyword) { [weak self] result in
             DispatchQueue.main.async {

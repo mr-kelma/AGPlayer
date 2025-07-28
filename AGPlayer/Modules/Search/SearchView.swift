@@ -15,7 +15,7 @@ final class SearchView: UIView {
         label.isHidden = true
         return label
     }()
-
+    
     // MARK: - Init
     
     override init(frame: CGRect) {
@@ -23,11 +23,11 @@ final class SearchView: UIView {
         configureAppearance()
         setupLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Public methods
     
     func showEmptyState() {
@@ -41,7 +41,7 @@ final class SearchView: UIView {
         tableView.isHidden = true
         emptyStateLabel.isHidden = true
     }
-
+    
     func showResults() {
         activityIndicator.stopAnimating()
         tableView.isHidden = false
@@ -60,16 +60,16 @@ final class SearchView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             addSubview($0)
         }
-
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-
+            
             activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
-
+            
             emptyStateLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             emptyStateLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])

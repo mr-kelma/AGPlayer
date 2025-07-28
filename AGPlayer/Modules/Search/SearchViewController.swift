@@ -14,7 +14,7 @@ final class SearchViewController: UIViewController {
     private var searchView: SearchView {
         view as! SearchView
     }
-
+    
     private var textPublisher: AnyPublisher<String, Never> {
         searchTextPublisher.eraseToAnyPublisher()
     }
@@ -35,7 +35,7 @@ final class SearchViewController: UIViewController {
         setupSearchController()
         setupTableView()
     }
-
+    
     // MARK: - Private methods
     
     private func configureAppearance() {
@@ -60,7 +60,7 @@ final class SearchViewController: UIViewController {
                 self?.presenter.didSearch(for: keyword)
             }
     }
-
+    
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -72,7 +72,7 @@ final class SearchViewController: UIViewController {
     private func setupTableView() {
         searchView.tableView.rowHeight = UITableView.automaticDimension
         searchView.tableView.estimatedRowHeight = 80
-
+        
         searchView.tableView.dataSource = self
         searchView.tableView.delegate = self
         searchView.tableView.register(TrackTableViewCell.self, forCellReuseIdentifier: TrackTableViewCell.reuseIdentifier)
@@ -91,7 +91,7 @@ extension SearchViewController: SearchViewInput {
             searchView.tableView.reloadData()
         }
     }
-
+    
     func displayError(_ error: Error) {
         searchView.showEmptyState()
         print("Error: \(error.localizedDescription)")
@@ -104,7 +104,7 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         currentResults.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let track = currentResults[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: TrackTableViewCell.reuseIdentifier, for: indexPath) as! TrackTableViewCell

@@ -4,7 +4,7 @@ enum NetworkError: Error, LocalizedError {
     case invalidKeyword
     case invalidURL
     case noData
-
+    
     var errorDescription: String? {
         switch self {
         case .invalidKeyword:

@@ -9,7 +9,7 @@ final class ItunesTracksService: ItunesTracksServiceProtocol {
     // MARK: - Init
     
     private init() {}
-
+    
     // MARK: - Public methods
     
     func searchTracks(keyword: String, completion: @escaping (Result<[Track], Error>) -> Void) {
@@ -17,9 +17,9 @@ final class ItunesTracksService: ItunesTracksServiceProtocol {
             completion(.failure(NetworkError.invalidKeyword))
             return
         }
-
+        
         let urlString = "https://itunes.apple.com/search?term=\(encodedKeyword)"
-
+        
         guard let url = URL(string: urlString) else {
             completion(.failure(NetworkError.invalidURL))
             return
@@ -42,7 +42,7 @@ final class ItunesTracksService: ItunesTracksServiceProtocol {
                 completion(.failure(NetworkError.noData))
                 return
             }
-
+            
             do {
                 let decoder = JSONDecoder()
                 let trackSearchResult = try decoder.decode(TrackSearchResult.self, from: data)
@@ -53,7 +53,6 @@ final class ItunesTracksService: ItunesTracksServiceProtocol {
             }
             
         }
-
         task.resume()
     }
 }

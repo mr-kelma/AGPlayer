@@ -6,13 +6,13 @@ enum PlayerModuleBuilder {
         let presenter = PlayerPresenter(track: track)
         let interactor = PlayerInteractor()
         let router = PlayerRouter()
-
+        
         viewController.presenter = presenter
         presenter.view = viewController
         presenter.interactor = interactor
         presenter.router = router
         router.viewController = viewController
-
+        
         return viewController
     }
 }

@@ -5,17 +5,17 @@ final class PlayerViewController: UIViewController {
     // MARK: - Properties
     
     var presenter: PlayerPresenterProtocol!
-
+    
     private var playerView: PlayerView {
         view as! PlayerView
     }
-
+    
     // MARK: - LifeCycle
     
     override func loadView() {
         view = PlayerView()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
@@ -28,11 +28,11 @@ final class PlayerViewController: UIViewController {
         playerView.playPauseButton.addTarget(self, action: #selector(didTapPlayPause), for: .touchUpInside)
         playerView.dismissButton.addTarget(self, action: #selector(didTapDismiss), for: .touchUpInside)
     }
-
+    
     @objc private func didTapPlayPause() {
         presenter.didTapPlayPause()
     }
-
+    
     @objc private func didTapDismiss() {
         presenter.router?.close()
     }
@@ -55,7 +55,7 @@ extension PlayerViewController: PlayerViewInput {
     func updateCurrentTime(_ seconds: Double) {
         playerView.updateCurrentTime(seconds)
     }
-
+    
     func updateDuration(_ seconds: Double) {
         playerView.updateDuration(seconds)
     }

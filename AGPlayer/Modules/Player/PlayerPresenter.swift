@@ -18,7 +18,7 @@ final class PlayerPresenter: PlayerPresenterProtocol {
     }
     
     // MARK: - Public methods
-
+    
     func viewDidLoad() {
         interactor?.output = self
         view?.display(track: track)
@@ -27,7 +27,7 @@ final class PlayerPresenter: PlayerPresenterProtocol {
             interactor?.prepareToPlay()
         }
     }
-
+    
     func didTapPlayPause() {
         interactor?.togglePlayback()
         isPlaying.toggle()
@@ -42,7 +42,7 @@ extension PlayerPresenter: PlayerInteractorOutput {
         view?.updateCurrentTime(currentTime)
         view?.updateDuration(duration)
     }
-
+    
     func didFinishPlaying() {
         isPlaying = false
         view?.updatePlayState(isPlaying: false)
