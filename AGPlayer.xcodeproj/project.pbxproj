@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		70EA05792E37789600156573 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7080851D2E3385FC00FA3C0D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 708085242E3385FC00FA3C0D;
+			remoteInfo = AGPlayer;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		708085252E3385FC00FA3C0D /* AGPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AGPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		70EA05752E37789600156573 /* AGPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AGPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -29,10 +40,22 @@
 			path = AGPlayer;
 			sourceTree = "<group>";
 		};
+		70EA05762E37789600156573 /* AGPlayerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AGPlayerTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		708085222E3385FC00FA3C0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70EA05722E37789600156573 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				708085272E3385FC00FA3C0D /* AGPlayer */,
+				70EA05762E37789600156573 /* AGPlayerTests */,
 				708085262E3385FC00FA3C0D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				708085252E3385FC00FA3C0D /* AGPlayer.app */,
+				70EA05752E37789600156573 /* AGPlayerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,6 +108,29 @@
 			productReference = 708085252E3385FC00FA3C0D /* AGPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
+		70EA05742E37789600156573 /* AGPlayerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70EA057B2E37789600156573 /* Build configuration list for PBXNativeTarget "AGPlayerTests" */;
+			buildPhases = (
+				70EA05712E37789600156573 /* Sources */,
+				70EA05722E37789600156573 /* Frameworks */,
+				70EA05732E37789600156573 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				70EA057A2E37789600156573 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				70EA05762E37789600156573 /* AGPlayerTests */,
+			);
+			name = AGPlayerTests;
+			packageProductDependencies = (
+			);
+			productName = AGPlayerTests;
+			productReference = 70EA05752E37789600156573 /* AGPlayerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -95,6 +143,10 @@
 				TargetAttributes = {
 					708085242E3385FC00FA3C0D = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					70EA05742E37789600156573 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 708085242E3385FC00FA3C0D;
 					};
 				};
 			};
@@ -113,12 +165,20 @@
 			projectRoot = "";
 			targets = (
 				708085242E3385FC00FA3C0D /* AGPlayer */,
+				70EA05742E37789600156573 /* AGPlayerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		708085232E3385FC00FA3C0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70EA05732E37789600156573 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +195,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		70EA05712E37789600156573 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		70EA057A2E37789600156573 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 708085242E3385FC00FA3C0D /* AGPlayer */;
+			targetProxy = 70EA05792E37789600156573 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		708085392E3385FF00FA3C0D /* Debug */ = {
@@ -327,6 +402,42 @@
 			};
 			name = Release;
 		};
+		70EA057C2E37789600156573 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6PB4D5QX22;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mr-kelma.AGPlayerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AGPlayer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AGPlayer";
+			};
+			name = Debug;
+		};
+		70EA057D2E37789600156573 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6PB4D5QX22;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mr-kelma.AGPlayerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AGPlayer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AGPlayer";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -344,6 +455,15 @@
 			buildConfigurations = (
 				708085392E3385FF00FA3C0D /* Debug */,
 				7080853A2E3385FF00FA3C0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70EA057B2E37789600156573 /* Build configuration list for PBXNativeTarget "AGPlayerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70EA057C2E37789600156573 /* Debug */,
+				70EA057D2E37789600156573 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

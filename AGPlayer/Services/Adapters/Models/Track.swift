@@ -1,6 +1,6 @@
 import Foundation
 
-struct Track {
+struct Track: Equatable {
     let artistName: String?
     let collectionName: String?
     let trackName: String?
