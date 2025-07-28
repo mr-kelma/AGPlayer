@@ -134,7 +134,6 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchTextPublisher.send("")
         currentResults = []
-        searchView.showEmptyState()
         searchView.tableView.reloadData()
         searchController.isActive = false
     }
