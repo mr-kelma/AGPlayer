@@ -65,7 +65,7 @@ final class SearchViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = "Artists, Songs, Lyrics and More"
+        searchController.searchBar.placeholder = "Type a song name"
         searchController.searchBar.autocapitalizationType = .none
     }
     
