@@ -44,9 +44,23 @@ extension PlayerViewController: PlayerViewInput {
     func display(track: Track) {
         playerView.trackNameLabel.text = track.trackName ?? "Unknown song"
         playerView.artistNameLabel.text = track.artistName ?? "Unknown artist"
-        if let urlString = track.artworkUrl100,
-           let url = URL(string: urlString) {
-            playerView.coverImageView.loadImage(from: url, placeholder: UIImage(systemName: "photo"))
+        
+        if let url = track.artworkURL(size: 250) {
+            playerView.coverImageView.loadImage(from: url) { [weak self] image in
+                self?.playerView.updateGradient(from: image)
+            }
         }
+    }
+    
+    func updateCurrentTime(_ seconds: Double) {
+        playerView.updateCurrentTime(seconds)
+    }
+
+    func updateDuration(_ seconds: Double) {
+        playerView.updateDuration(seconds)
+    }
+    
+    func updatePlayState(isPlaying: Bool) {
+        playerView.updatePlayState(isPlaying: isPlaying)
     }
 }

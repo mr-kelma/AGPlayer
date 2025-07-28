@@ -7,6 +7,11 @@ struct Track {
     let artworkUrl100: String?
     let previewUrl: String?
     
+    func artworkURL(size: Int) -> URL? {
+        guard let urlString = artworkUrl100 else { return nil }
+        return URL(string: urlString.replacingOccurrences(of: "100x100bb.jpg", with: "\(size)x\(size)bb.jpg"))
+    }
+    
     init(
         artistName: String?,
         collectionName: String?,

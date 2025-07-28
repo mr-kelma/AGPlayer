@@ -1,15 +1,22 @@
 import UIKit
 
 extension UIImageView {
-    func loadImage(from url: URL, placeholder: UIImage? = nil) {
+    func loadImage(from url: URL, placeholder: UIImage? = nil, completion: ((UIImage?) -> Void)? = nil) {
         self.image = placeholder
-        
-        DispatchQueue.global().async {
-            if let data = try? Data(contentsOf: url),
-               let image = UIImage(data: data) {
+
+        let currentURL = url
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let data = try? Data(contentsOf: currentURL),
+                  let image = UIImage(data: data) else {
                 DispatchQueue.main.async {
-                    self.image = image
+                    completion?(nil)
                 }
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.image = image
+                completion?(image)
             }
         }
     }

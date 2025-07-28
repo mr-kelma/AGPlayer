@@ -8,14 +8,14 @@ final class MockItunesTracksService: ItunesTracksServiceProtocol {
             collectionName: "Discovery",
             trackName: "Harder, Better, Faster, Stronger",
             artworkUrl100: "https://i1.sndcdn.com/artworks-000245246654-26x90g-t500x500.jpg",
-            previewUrl: "https://media.pitchfork.com/photos/63f641d801dbe796fab80055/1:1/w_320,c_limit/Daft-Punk-Random-Access-Memories.jpg"
+            previewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/45/f6/fa/45f6faca-c0c4-d05a-4265-715e8ee93f7d/mzaf_156906596969698902.std.aac.p.m4a"
         ),
         Track(
             artistName: "Radiohead",
             collectionName: "In Rainbows",
             trackName: "Nude",
             artworkUrl100: "https://i1.sndcdn.com/artworks-uMuepaG1pEYh-0-t500x500.png",
-            previewUrl: "https://upload.wikimedia.org/wikipedia/en/d/d2/Hbfs_single.jpg"
+            previewUrl: "https://video-ssl.itunes.apple.com/itunes-assets/Video128/v4/19/f6/41/19f64120-ab52-fd5a-9fba-23f2690d192f/mzvf_5514562356458701879.640x352.h264lc.U.p.m4v"
         )
     ]
     
